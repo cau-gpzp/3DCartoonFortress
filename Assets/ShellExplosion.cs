@@ -18,17 +18,24 @@ public class ShellExplosion : MonoBehaviour
 
     // Collision deteceted
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log("Bomb");
-        Collider[] hitColliders = new Collider[30];
-        Vector3 centre = this.transform.position;
-        int numColliders = Physics.OverlapSphereNonAlloc(centre, 3.0f, hitColliders);
-        for (int i = 0; i < numColliders; i++)
-            Destroy(hitColliders[i].gameObject);
         Explode();
-        Destroy(this.gameObject);
     }
 
     void Explode() {
+        ExplodeEffect();
+        DestroyAround();
+    }
+
+    void DestroyAround() {
+        Collider[] hitColliders = new Collider[30];
+        Vector3 centre = this.transform.position;
+        int numColliders = Physics.OverlapSphereNonAlloc(centre, 1.5f, hitColliders);
+        for (int i = 0; i < numColliders; i++)
+            Destroy(hitColliders[i].gameObject);
+        Destroy(this.gameObject);
+    }
+
+    void ExplodeEffect() {
         ParticleSystem effect = Instantiate(exp, this.transform.position, this.transform.rotation);
         effect.Play();
     }
