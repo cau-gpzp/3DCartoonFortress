@@ -1,1 +1,3 @@
-TODO: Add Graphical explosion effect
+TODO:
+- Fix the bug on explosion
+- Set character moving 
