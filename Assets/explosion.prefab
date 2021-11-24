@@ -976,7 +976,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 100
+        scalar: 200
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4888,7 +4888,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3650048584141128150}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 6.307066, y: 3.8581295, z: 4.3635683}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
   m_Children: []
   m_Father: {fileID: 4416197040586992635}
@@ -4951,7 +4951,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3510647e-38, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: -7.772241e-19, y: -7.738227e-19, z: -1.9260532e-19, w: -4.7938742e-20}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
