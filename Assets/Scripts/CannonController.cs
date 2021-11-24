@@ -5,13 +5,14 @@ using UnityEngine.Events;
 
 public class CannonController : MonoBehaviour
 {
-    public UnityAction Shot;
+    PlayerProperties properties;
+    KeyConfig keyConfig;
 
     public GameObject shell;
-    Rigidbody shellRb;
     public Transform shotPos;
-    // public GameObject explosion;
     public float firePower;
+    public UnityAction ChangeTurn;
+    private bool shotting;
 
     public int speed;
     public float friction, lerpSpeed;
@@ -20,27 +21,27 @@ public class CannonController : MonoBehaviour
     public Camera cannonCamera;
 
     // Start is called before the first frame update
-    void Start() {
-        init();        
+    void Awake() {
+        Init();        
     }
 
-    void init() {
-        xDegrees = yDegrees = 0.0f;
+    void Init() {
+        // xDegrees = yDegrees = 0.0f;
         Vector3 pos = this.transform.position;
         pos.y += 1;
         pos.z -= 1;
         cannonCamera.transform.position = pos;
+
+        properties = GetComponent<PlayerProperties>();
+        keyConfig = GetComponent<KeyConfig>();
+
+        shotting = false;
     }
 
     // Update is called once per frame
     void Update() {
-        // RaycastHit hit;
-        // Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        // if(Physics.Raycast(ray, out hit)) {
-        //     if(hit.transform.gameObject.tag == "Cannon") {
-        //     }
-        // }
+        if(properties.itsTurn == false || properties.view == ViewMode.Nothing) return;
+        if(properties.isSieging == false) return;
 
         if(Input.GetKey(KeyCode.UpArrow))
             xDegrees -= speed*friction;
@@ -52,17 +53,15 @@ public class CannonController : MonoBehaviour
             yDegrees += speed*friction;
         AdjustRotation();
         
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            FireShell();
-            Shot?.Invoke();
+        if(!shotting && Input.GetKeyDown(KeyCode.Space)) {
+            Fire();
+            shotting = true;
         }
     }
 
     void AdjustRotation() {
         xDegrees = Mathf.Max(xDegrees, -90);
         xDegrees = Mathf.Min(xDegrees, 20);
-        yDegrees = Mathf.Max(yDegrees, -60);
-        yDegrees = Mathf.Min(yDegrees, 60);
 
         // fromRotation = transform.rotation;
         toRotation = Quaternion.Euler(xDegrees, yDegrees, 0);
@@ -70,15 +69,16 @@ public class CannonController : MonoBehaviour
         transform.rotation = toRotation;   
     }
 
-    public void FireShell() {
+    public void Fire() {
+        // TODO: Vector transformation
+        // Vector3 normVector = this.transform.InverseTransformDirection(this.transform.forward);
         shotPos.rotation = this.transform.rotation;
-        GameObject shootingShell = Instantiate(shell, shotPos.position, shotPos.rotation) as GameObject;
+        GameObject shootingShell = Instantiate(shell, shotPos.position, shotPos.rotation);
+        shootingShell.GetComponent<ShellController>().TurnEnd += TurnEnd;
+        shootingShell.GetComponent<Rigidbody>().AddForce(shotPos.transform.forward * firePower, ForceMode.Impulse);
+    }
 
-        Vector3 normVector = this.transform.InverseTransformDirection(this.transform.forward);
-        shellRb = shootingShell.GetComponent<Rigidbody>();
-        shellRb.AddForce(this.transform.forward * firePower, ForceMode.Acceleration);
-
-        // Vector3 v = this.transform.forward;
-        // Debug.Log(System.String.Format("{0} {0} {0} {0} {0} {0}", normVector.x, normVector.y, normVector.z, v.x, v.y, v.z));
+    void TurnEnd() {
+        ChangeTurn!.Invoke();
     }
 }

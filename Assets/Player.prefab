@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2215388670474530961}
-  - component: {fileID: 2215388670474530974}
   - component: {fileID: 2208263788692375734}
+  - component: {fileID: 6640878717929388151}
+  - component: {fileID: 2215388670474530974}
   - component: {fileID: 6488529004393229978}
+  - component: {fileID: 2000034643896367547}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,20 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2215388670474530974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2215388670474530960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f33f6dcd23c14c8b801eecab36839c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 2215388671374928725}
-  cannonCamera: {fileID: 2215388671176021836}
 --- !u!136 &2208263788692375734
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -63,6 +51,34 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6640878717929388151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215388670474530960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58de9327692b64d469d9546758670eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: 2
+  itsTurn: 0
+--- !u!114 &2215388670474530974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215388670474530960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f33f6dcd23c14c8b801eecab36839c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 2215388671374928725}
+  cannonCamera: {fileID: 2215388671176021836}
 --- !u!114 &6488529004393229978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,11 +93,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shell: {fileID: 5617843459851382406, guid: 8c5fd3c01cff2477bb91d47bc2005bc6, type: 3}
   shotPos: {fileID: 2215388670598357421}
-  firePower: 2000
+  firePower: 100
   speed: 1
   friction: 0.3
   lerpSpeed: 5
   cannonCamera: {fileID: 2215388671176021836}
+--- !u!114 &2000034643896367547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215388670474530960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7890901fcff4255bf22a0ac450e9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 273
+  down: 274
+  left: 276
+  right: 275
+  fire: 32
+  siege: 9
 --- !u!1 &2215388670598357420
 GameObject:
   m_ObjectHideFlags: 0

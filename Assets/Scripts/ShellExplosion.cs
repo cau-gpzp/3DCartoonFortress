@@ -24,15 +24,22 @@ public class ShellExplosion : MonoBehaviour
     void Explode() {
         ExplodeEffect();
         DestroyAround();
+        Destroy(this.gameObject);
     }
 
     void DestroyAround() {
         Collider[] hitColliders = new Collider[30];
         Vector3 centre = this.transform.position;
         int numColliders = Physics.OverlapSphereNonAlloc(centre, 1.5f, hitColliders);
-        for (int i = 0; i < numColliders; i++)
-            Destroy(hitColliders[i].gameObject);
-        Destroy(this.gameObject);
+        for (int i = 0; i < numColliders; i++) {
+            switch(hitColliders[i].gameObject.tag) {
+                case "Land":
+                    Destroy(hitColliders[i].gameObject);
+                    break;
+                default:
+                    continue;
+            }
+        }
     }
 
     void ExplodeEffect() {

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1893197497770563055}
   - component: {fileID: 6967667577722440066}
-  - component: {fileID: 4344717948616370910}
   - component: {fileID: 3475148687961966378}
   m_Layer: 0
   m_Name: BombShell
@@ -44,18 +43,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b715f70489a44432fa6cbd00fad5ed5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4344717948616370910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5617843459851382406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5435df29b654c5a932e9f6576a5469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   exp: {fileID: 3380974263240610745, guid: 3feaa70f9f8804c7bacbaeb00a9e9507, type: 3}

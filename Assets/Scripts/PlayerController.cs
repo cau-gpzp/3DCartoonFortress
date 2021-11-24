@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-enum ViewMode {
-    ShoulderView, FirstView, NOTHING
-}
-
 public class PlayerController : MonoBehaviour
 {
-    public UnityAction ChangeTurn;
-
     public Camera mainCamera, cannonCamera;
-    private ViewMode viewMode;
-    private bool itsTurn;
+    PlayerProperties properties;
+    KeyConfig keyConfig;
 
-    CannonController cannon;
+    void Init() {
+        properties = GetComponent<PlayerProperties>();
+        keyConfig = GetComponent<KeyConfig>();
+        TurnOff();
+    }
 
     void Awake() {
-        TurnOff();
-        cannon = this.GetComponent<CannonController>();
-        cannon.Shot += Shot;
+        Init();
     }
 
     // Start is called before the first frame update
@@ -30,43 +26,40 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(itsTurn == false)
-            return;
+        if(properties.itsTurn == false || properties.view == ViewMode.Nothing) return;
+        if(properties.isSieging == true) return;
 
-        if(Input.GetKeyDown(KeyCode.Tab)) {
-            viewMode += 1;
-            viewMode = (ViewMode)((int)viewMode % System.Enum.GetNames(typeof(ViewMode)).Length);
-            ChangeCam();
+        // siege mode
+        if(properties.isSieging == false && Input.GetKeyDown(keyConfig.siege)) {
+            properties.SiegeOn();
+            ChangeCamera();
         }
     }
 
-    public void Shot() {
-        Debug.Log("Shot");
-        ChangeTurn?.Invoke();
-    }
-
     public void TurnOff() {
-        itsTurn = false;
-        viewMode = ViewMode.NOTHING;
-        ChangeCam();
+        properties.Off();
+        ChangeCamera();
     }
 
     public void TurnOn() {
-        itsTurn = true;
-        viewMode = ViewMode.ShoulderView;
-        ChangeCam();
+        properties.On();
+        ChangeCamera();
     }
 
-    void ChangeCam() {
-        if(viewMode == ViewMode.ShoulderView) {
-            mainCamera.enabled = true;
-            cannonCamera.enabled = false;
-        } else if(viewMode == ViewMode.FirstView) {
-            mainCamera.enabled = false;
-            cannonCamera.enabled = true;
-        } else {
-            mainCamera.enabled = false;
-            cannonCamera.enabled = false;
+    void ChangeCamera() {
+        switch(properties.view) {
+            case ViewMode.ShoulderView:
+                mainCamera.enabled = true;
+                cannonCamera.enabled = false;
+                break;
+            case ViewMode.FirstView:
+                mainCamera.enabled = false;
+                cannonCamera.enabled = true;
+                break;
+            default: // nothing (off)
+                mainCamera.enabled = false;
+                cannonCamera.enabled = false;
+                break;
         }
     }
 }

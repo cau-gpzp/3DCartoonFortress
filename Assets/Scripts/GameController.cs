@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
         curTurn = players.Length - 1;
 
         foreach (GameObject p in players)
-            p.GetComponent<PlayerController>().ChangeTurn += ChangeTurn;
+            p.GetComponent<CannonController>().ChangeTurn += ChangeTurn;
     }
 
     void Awake() {
