@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera, cannonCamera;
     PlayerProperties properties;
     KeyConfig keyConfig;
+    CannonController cc;
 
     void Init() {
         properties = GetComponent<PlayerProperties>();
         keyConfig = GetComponent<KeyConfig>();
+        cc = GetComponent<CannonController>();
+        cc.ChangeCamera += ChangeCamera;
+
         TurnOff();
     }
 
@@ -26,11 +30,12 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(properties.itsTurn == false || properties.view == ViewMode.Nothing) return;
+        if(properties.itsTurn == false) return;
         if(properties.isSieging == true) return;
 
         // siege mode
         if(properties.isSieging == false && Input.GetKeyDown(keyConfig.siege)) {
+            Debug.Log(properties.test);
             properties.SiegeOn();
             ChangeCamera();
         }
@@ -61,5 +66,10 @@ public class PlayerController : MonoBehaviour
                 cannonCamera.enabled = false;
                 break;
         }
+    }
+
+    public void CamSetting(Rect r) {
+        mainCamera.rect = r;
+        cannonCamera.rect = r;
     }
 }

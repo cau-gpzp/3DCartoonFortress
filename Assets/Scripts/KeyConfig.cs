@@ -7,6 +7,7 @@ public class KeyConfig : MonoBehaviour
     public KeyCode up, down, left, right;
     public KeyCode fire;
     public KeyCode siege;
+    public KeyCode tt;
 
     KeyConfig() {
         up = KeyCode.UpArrow;
@@ -15,5 +16,6 @@ public class KeyConfig : MonoBehaviour
         right = KeyCode.RightArrow;
         fire = KeyCode.Space;
         siege = KeyCode.Tab;
+        tt = KeyCode.A;
     }
 }

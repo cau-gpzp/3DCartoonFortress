@@ -19,6 +19,7 @@ public class CannonController : MonoBehaviour
     float xDegrees, yDegrees;
     Quaternion fromRotation, toRotation;
     public Camera cannonCamera;
+    public UnityAction ChangeCamera;
 
     // Start is called before the first frame update
     void Awake() {
@@ -40,20 +41,26 @@ public class CannonController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(properties.itsTurn == false || properties.view == ViewMode.Nothing) return;
+        if(properties.itsTurn == false) return;
         if(properties.isSieging == false) return;
 
-        if(Input.GetKey(KeyCode.UpArrow))
+        if(Input.GetKey(keyConfig.up))
             xDegrees -= speed*friction;
-        if(Input.GetKey(KeyCode.DownArrow))
+        if(Input.GetKey(keyConfig.down))
             xDegrees += speed*friction;
-        if(Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKey(keyConfig.left))
             yDegrees -= speed*friction;
-        if(Input.GetKey(KeyCode.RightArrow))
+        if(Input.GetKey(keyConfig.right))
             yDegrees += speed*friction;
         AdjustRotation();
+
+        if(properties.isSieging == true && Input.GetKeyDown(keyConfig.siege)) {
+            Debug.Log(properties.test);
+            properties.SiegeOff();
+            ChangeCamera!.Invoke();
+        }
         
-        if(!shotting && Input.GetKeyDown(KeyCode.Space)) {
+        if(!shotting && Input.GetKeyDown(keyConfig.fire)) {
             Fire();
             shotting = true;
         }
@@ -66,7 +73,7 @@ public class CannonController : MonoBehaviour
         // fromRotation = transform.rotation;
         toRotation = Quaternion.Euler(xDegrees, yDegrees, 0);
         // transform.rotation = Quaternion.Lerp(fromRotation, toRotation, Time.deltaTime * lerpSpeed);
-        transform.rotation = toRotation;   
+        transform.rotation = toRotation;
     }
 
     public void Fire() {

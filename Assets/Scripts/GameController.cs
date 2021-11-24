@@ -7,11 +7,16 @@ public class GameController : MonoBehaviour {
     int prevTurn, curTurn;
 
     void Init() {
-        prevTurn = 0;
-        curTurn = players.Length - 1;
+        // prevTurn = 0;
+        // curTurn = players.Length - 1;
 
         foreach (GameObject p in players)
             p.GetComponent<CannonController>().ChangeTurn += ChangeTurn;
+        players[0].GetComponent<PlayerController>().CamSetting(new Rect(0.0f, 0.0f, 0.5f, 1.0f));
+        players[1].GetComponent<PlayerController>().CamSetting(new Rect(0.5f, 0.0f, 1.0f, 1.0f));
+
+        prevTurn = 0;
+        curTurn = 1;
     }
 
     void Awake() {

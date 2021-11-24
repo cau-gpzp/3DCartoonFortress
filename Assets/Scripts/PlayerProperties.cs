@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum ViewMode {
-    ShoulderView, FirstView, Nothing
+    ShoulderView, FirstView,
 }
 
 public class PlayerProperties : MonoBehaviour
 {
+    public int test;
     public ViewMode view;
     public bool itsTurn;
     public bool isSieging;
 
     PlayerProperties() {
-        view = ViewMode.Nothing;
+        // view = ViewMode.Nothing;
         itsTurn = false;
         isSieging = false;
+        test = 0;
     }
 
     public void On() {
@@ -26,16 +28,18 @@ public class PlayerProperties : MonoBehaviour
 
     public void Off() {
         itsTurn = false;
-        view = ViewMode.Nothing;
+        view = ViewMode.ShoulderView;
     }
 
     public void SiegeOn() {
         isSieging = true;
         view = ViewMode.FirstView;
+        test++;
     }
 
     public void SiegeOff() {
         isSieging = false;
         view = ViewMode.ShoulderView;
+        test++;
     }
 }

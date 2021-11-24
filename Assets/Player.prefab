@@ -63,8 +63,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58de9327692b64d469d9546758670eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
   view: 2
   itsTurn: 0
+  isSieging: 0
 --- !u!114 &2215388670474530974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +118,7 @@ MonoBehaviour:
   right: 275
   fire: 32
   siege: 9
+  tt: 97
 --- !u!1 &2215388670598357420
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +289,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 59.735867
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
