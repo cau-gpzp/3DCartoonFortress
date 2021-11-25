@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     PlayerProperties properties;
     KeyConfig keyConfig;
     CannonController cc;
+    private float delta;
 
     void Init() {
         properties = GetComponent<PlayerProperties>();
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         cc.ChangeCamera += ChangeCamera;
 
         TurnOff();
+        delta = 0.0f;
     }
 
     void Awake() {
@@ -33,9 +35,11 @@ public class PlayerController : MonoBehaviour
         if(properties.itsTurn == false) return;
         if(properties.isSieging == true) return;
 
+        delta += Time.deltaTime;
+
         // siege mode
-        if(properties.isSieging == false && Input.GetKeyDown(keyConfig.siege)) {
-            Debug.Log(properties.test);
+        if(delta > 0.1f && Input.GetKeyDown(keyConfig.siege)) {
+            delta = 0.0f;
             properties.SiegeOn();
             ChangeCamera();
         }

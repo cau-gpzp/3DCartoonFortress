@@ -9,9 +9,14 @@ public class ShellController : MonoBehaviour
 
     public ParticleSystem exp;
 
+    public static float DAMAGE = 30.0f;
+    public static float radius = 2.0f;
+
+    private float delta;
+
     // Start is called before the first frame update
     void Start() {
-        
+        delta = 0.0f;
     }
 
     // Update is called once per frame
@@ -21,28 +26,39 @@ public class ShellController : MonoBehaviour
     }
 
     void OnDestroy() {
-        TurnEnd!.Invoke();
+        TurnEnd?.Invoke();
     }
 
     // Collision deteceted
     private void OnCollisionEnter(Collision collision) {
-        Explode();
+        if(delta != 0.0f) return;
+        delta += Time.deltaTime;
+        Explode(collision);
     }
 
-    void Explode() {
-        ExplodeEffect();
-        DestroyAround();
+    void Explode(Collision collision) {
         Destroy(this.gameObject);
+        ExplodeEffect();
+        DestroyAround(collision);
     }
 
-    void DestroyAround() {
-        Collider[] hitColliders = new Collider[30];
+    void DestroyAround(Collision collision) {
+        Collider[] hitColliders = new Collider[50];
         Vector3 centre = this.transform.position;
-        int numColliders = Physics.OverlapSphereNonAlloc(centre, 1.5f, hitColliders);
+        int numColliders = Physics.OverlapSphereNonAlloc(centre, radius, hitColliders);
         for (int i = 0; i < numColliders; i++) {
-            switch(hitColliders[i].gameObject.tag) {
+            GameObject o = hitColliders[i].gameObject;
+            if(o.tag != "Land") Debug.Log(o.name);
+            switch(o.tag) {
                 case "Land":
-                    Destroy(hitColliders[i].gameObject);
+                    Destroy(o.gameObject);
+                    break;
+                case "Player":
+                    float effect = 1.0f;
+                    if(collision.gameObject.tag != "Player") 
+                        effect = ComputeEffect(this.transform, o.transform);
+                    float damage = DAMAGE * effect;
+                    o.BroadcastMessage("ApplyDamage", damage);
                     break;
                 default:
                     continue;
@@ -53,5 +69,14 @@ public class ShellController : MonoBehaviour
     void ExplodeEffect() {
         ParticleSystem effect = Instantiate(exp, this.transform.position, this.transform.rotation);
         effect.Play();
+    }
+
+    float ComputeEffect(Transform shell, Transform target) {
+        Vector3 shellOriginPos = shell.position;
+        Vector3 targetOriginPos = target.position;
+
+        float distance = Vector3.Distance(shellOriginPos, targetOriginPos);
+        if(distance > radius + 1.0f) return 0.0f;
+        return 1.0f - 0.5f*distance/(radius + 1.0f);
     }
 }

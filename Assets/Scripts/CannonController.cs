@@ -20,10 +20,11 @@ public class CannonController : MonoBehaviour
     Quaternion fromRotation, toRotation;
     public Camera cannonCamera;
     public UnityAction ChangeCamera;
+    private float delta;
 
     // Start is called before the first frame update
     void Awake() {
-        Init();        
+        Init();
     }
 
     void Init() {
@@ -37,12 +38,16 @@ public class CannonController : MonoBehaviour
         keyConfig = GetComponent<KeyConfig>();
 
         shotting = false;
+
+        delta = 0.0f;
     }
 
     // Update is called once per frame
     void Update() {
         if(properties.itsTurn == false) return;
         if(properties.isSieging == false) return;
+
+        delta += Time.deltaTime;
 
         if(Input.GetKey(keyConfig.up))
             xDegrees -= speed*friction;
@@ -54,10 +59,10 @@ public class CannonController : MonoBehaviour
             yDegrees += speed*friction;
         AdjustRotation();
 
-        if(properties.isSieging == true && Input.GetKeyDown(keyConfig.siege)) {
-            Debug.Log(properties.test);
+        if(delta > 0.1f && Input.GetKeyDown(keyConfig.siege)) {
+            delta = 0.0f;
             properties.SiegeOff();
-            ChangeCamera!.Invoke();
+            ChangeCamera?.Invoke();
         }
         
         if(!shotting && Input.GetKeyDown(keyConfig.fire)) {
@@ -86,6 +91,7 @@ public class CannonController : MonoBehaviour
     }
 
     void TurnEnd() {
-        ChangeTurn!.Invoke();
+        shotting = false;
+        ChangeTurn?.Invoke();
     }
 }

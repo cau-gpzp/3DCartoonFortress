@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 2215388670474530974}
   - component: {fileID: 6488529004393229978}
   - component: {fileID: 2000034643896367547}
+  - component: {fileID: 4979621755167149262}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +49,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
+  m_Height: 2
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6640878717929388151
 MonoBehaviour:
@@ -63,7 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58de9327692b64d469d9546758670eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 0
   view: 2
   itsTurn: 0
   isSieging: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   shell: {fileID: 5617843459851382406, guid: 8c5fd3c01cff2477bb91d47bc2005bc6, type: 3}
   shotPos: {fileID: 2215388670598357421}
   firePower: 100
-  speed: 1
-  friction: 0.3
+  speed: 3
+  friction: 0.1
   lerpSpeed: 5
   cannonCamera: {fileID: 2215388671176021836}
 --- !u!114 &2000034643896367547
@@ -118,7 +118,19 @@ MonoBehaviour:
   right: 275
   fire: 32
   siege: 9
-  tt: 97
+--- !u!114 &4979621755167149262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215388670474530960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8adc79ef60e45399f76d9d6a2ff08e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoint: 100
 --- !u!1 &2215388670598357420
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +371,6 @@ GameObject:
   - component: {fileID: 4163424343774207835}
   - component: {fileID: 1715217017378162957}
   - component: {fileID: 3126012852032773328}
-  - component: {fileID: 1326669566233881104}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -430,17 +441,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1326669566233881104
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3579423542605609773}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

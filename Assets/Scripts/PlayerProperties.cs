@@ -8,7 +8,6 @@ public enum ViewMode {
 
 public class PlayerProperties : MonoBehaviour
 {
-    public int test;
     public ViewMode view;
     public bool itsTurn;
     public bool isSieging;
@@ -17,7 +16,6 @@ public class PlayerProperties : MonoBehaviour
         // view = ViewMode.Nothing;
         itsTurn = false;
         isSieging = false;
-        test = 0;
     }
 
     public void On() {
@@ -34,12 +32,10 @@ public class PlayerProperties : MonoBehaviour
     public void SiegeOn() {
         isSieging = true;
         view = ViewMode.FirstView;
-        test++;
     }
 
     public void SiegeOff() {
         isSieging = false;
         view = ViewMode.ShoulderView;
-        test++;
     }
 }

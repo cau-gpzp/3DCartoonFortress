@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3475148687961966378}
   m_Layer: 0
   m_Name: BombShell
-  m_TagString: Untagged
+  m_TagString: Damagable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2295024393166358679}
   - component: {fileID: 9022098408434994595}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
