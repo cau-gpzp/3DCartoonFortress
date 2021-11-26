@@ -8,13 +8,13 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera, cannonCamera;
     PlayerProperties properties;
     KeyConfig keyConfig;
-    CannonController cc;
+    CannonHeadController cc;
     private float delta;
 
     void Init() {
         properties = GetComponent<PlayerProperties>();
         keyConfig = GetComponent<KeyConfig>();
-        cc = GetComponentInChildren<CannonController>();
+        cc = GetComponentInChildren<CannonHeadController>();
         cc.ChangeCamera += ChangeCamera;
 
         TurnOff();

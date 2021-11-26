@@ -131,6 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: {fileID: 3380974263240610745, guid: 3feaa70f9f8804c7bacbaeb00a9e9507, type: 3}
   shellCam: {fileID: 544861580495683528}
+  damage: 30
+  radius: 2
 --- !u!54 &3475148687961966378
 Rigidbody:
   m_ObjectHideFlags: 0

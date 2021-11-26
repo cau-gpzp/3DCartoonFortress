@@ -9,8 +9,8 @@ public class ShellController : MonoBehaviour
     public ParticleSystem exp;
     public Camera shellCam;
 
-    public static float DAMAGE = 30.0f;
-    public static float radius = 2.0f;
+    public float damage = 30.0f;
+    public float radius = 2.0f;
 
     private float delta;
 
@@ -31,8 +31,8 @@ public class ShellController : MonoBehaviour
 
     // Collision deteceted
     private void OnCollisionEnter(Collision collision) {
-        if(delta != 0.0f) return;
-        delta += Time.deltaTime;
+        // if(delta != 0.0f) return;
+        // delta += Time.deltaTime;
         Explode(collision);
     }
 
@@ -48,6 +48,7 @@ public class ShellController : MonoBehaviour
         int numColliders = Physics.OverlapSphereNonAlloc(centre, radius, hitColliders);
         for (int i = 0; i < numColliders; i++) {
             GameObject o = hitColliders[i].gameObject;
+            Debug.Log(o.name);
             switch(o.tag) {
                 case "Obstacle":
                     Destroy(o.gameObject);
@@ -56,8 +57,8 @@ public class ShellController : MonoBehaviour
                     float effect = 1.0f;
                     if(collision.gameObject.tag != "Player") 
                         effect = ComputeEffect(this.transform, o.transform);
-                    float damage = DAMAGE * effect;
-                    o.BroadcastMessage("ApplyDamage", damage);
+                    float actualDamage = damage * effect;
+                    o.BroadcastMessage("ApplyDamage", actualDamage);
                     break;
                 default:
                     continue;
