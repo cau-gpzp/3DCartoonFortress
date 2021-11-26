@@ -22,7 +22,7 @@ public class ShellController : MonoBehaviour
     // Update is called once per frame
     void Update() {
         Vector3 pos = this.transform.position;
-        if(pos.y < -10) Destroy(this.gameObject);
+        if(pos.y < -5) Destroy(this.gameObject);
     }
 
     void OnDestroy() {
@@ -48,9 +48,8 @@ public class ShellController : MonoBehaviour
         int numColliders = Physics.OverlapSphereNonAlloc(centre, radius, hitColliders);
         for (int i = 0; i < numColliders; i++) {
             GameObject o = hitColliders[i].gameObject;
-            if(o.tag != "Land") Debug.Log(o.name);
             switch(o.tag) {
-                case "Land":
+                case "Obstacle":
                     Destroy(o.gameObject);
                     break;
                 case "Player":

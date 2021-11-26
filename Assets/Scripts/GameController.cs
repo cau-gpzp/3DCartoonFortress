@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 
         for(int i = 0;i < players.Length;++i) {
             GameObject p = players[i];
-            p.GetComponent<CannonController>().ChangeTurn += ChangeTurn;
+            p.GetComponentInChildren<CannonController>().ChangeTurn += ChangeTurn;
             HealthController h = p.GetComponent<HealthController>();
             h.id = i;
             h.gc = this;

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2208263788692375734}
   - component: {fileID: 6640878717929388151}
   - component: {fileID: 2215388670474530974}
-  - component: {fileID: 6488529004393229978}
   - component: {fileID: 2000034643896367547}
   - component: {fileID: 4979621755167149262}
   m_Layer: 0
@@ -67,6 +66,12 @@ MonoBehaviour:
   view: 2
   itsTurn: 0
   isSieging: 0
+  cameraRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!114 &2215388670474530974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,25 +85,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2215388671374928725}
-  cannonCamera: {fileID: 2215388671176021836}
---- !u!114 &6488529004393229978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2215388670474530960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5b3c00705ed4f0282d20edd437296b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shell: {fileID: 5617843459851382406, guid: 8c5fd3c01cff2477bb91d47bc2005bc6, type: 3}
-  shotPos: {fileID: 2215388670598357421}
-  firePower: 100
-  speed: 3
-  friction: 0.1
-  lerpSpeed: 5
   cannonCamera: {fileID: 2215388671176021836}
 --- !u!114 &2000034643896367547
 MonoBehaviour:
@@ -130,7 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8adc79ef60e45399f76d9d6a2ff08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gc: {fileID: 0}
   healthPoint: 100
+  id: 0
 --- !u!1 &2215388670598357420
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2215388671804847868}
+  - component: {fileID: 5845204051185727987}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -360,6 +349,25 @@ Transform:
   m_Father: {fileID: 2215388670474530961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5845204051185727987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215388671804847871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5b3c00705ed4f0282d20edd437296b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shell: {fileID: 5617843459851382406, guid: 8c5fd3c01cff2477bb91d47bc2005bc6, type: 3}
+  shotPos: {fileID: 2215388670598357421}
+  firePower: 100
+  speed: 3
+  friction: 0.1
+  lerpSpeed: 5
+  cannonCamera: {fileID: 2215388671176021836}
 --- !u!1 &3579423542605609773
 GameObject:
   m_ObjectHideFlags: 0

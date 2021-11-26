@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Land
   - Damagable
+  - Obstacle
   layers:
   - Default
   - TransparentFX

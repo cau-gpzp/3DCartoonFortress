@@ -17,7 +17,6 @@ public class CannonController : MonoBehaviour
     public int speed;
     public float friction, lerpSpeed;
     float xDegrees, yDegrees;
-    Quaternion fromRotation, toRotation;
     public Camera cannonCamera;
     public UnityAction ChangeCamera;
     private float delta;
@@ -28,14 +27,10 @@ public class CannonController : MonoBehaviour
     }
 
     void Init() {
-        // xDegrees = yDegrees = 0.0f;
-        Vector3 pos = this.transform.position;
-        pos.y += 1;
-        pos.z -= 1;
-        cannonCamera.transform.position = pos;
+        xDegrees = yDegrees = 0.0f;
 
-        properties = GetComponent<PlayerProperties>();
-        keyConfig = GetComponent<KeyConfig>();
+        properties = GetComponentInParent<PlayerProperties>();
+        keyConfig = GetComponentInParent<KeyConfig>();
 
         shotting = false;
 
@@ -49,15 +44,22 @@ public class CannonController : MonoBehaviour
 
         delta += Time.deltaTime;
 
-        if(Input.GetKey(keyConfig.up))
+        if(Input.GetKey(keyConfig.up)) {
             xDegrees -= speed*friction;
-        if(Input.GetKey(keyConfig.down))
+            AdjustRotation();
+        }
+        if(Input.GetKey(keyConfig.down)) {
             xDegrees += speed*friction;
-        if(Input.GetKey(keyConfig.left))
+            AdjustRotation();
+        }
+        if(Input.GetKey(keyConfig.left)) {
             yDegrees -= speed*friction;
-        if(Input.GetKey(keyConfig.right))
+            AdjustRotation();
+        }
+        if(Input.GetKey(keyConfig.right)) {
             yDegrees += speed*friction;
-        AdjustRotation();
+            AdjustRotation();
+        }
 
         if(delta > 0.1f && Input.GetKeyDown(keyConfig.siege)) {
             delta = 0.0f;
@@ -75,15 +77,11 @@ public class CannonController : MonoBehaviour
         xDegrees = Mathf.Max(xDegrees, -90);
         xDegrees = Mathf.Min(xDegrees, 20);
 
-        // fromRotation = transform.rotation;
-        toRotation = Quaternion.Euler(xDegrees, yDegrees, 0);
-        transform.rotation = toRotation;
-        // transform.rotation = Quaternion.Lerp(fromRotation, toRotation, Time.deltaTime * lerpSpeed);
+        Quaternion toRotation = Quaternion.Euler(xDegrees, yDegrees, 0.0f);
+        this.transform.localRotation = toRotation;
     }
 
     public void Fire() {
-        // TODO: Vector transformation
-        // Vector3 normVector = this.transform.InverseTransformDirection(this.transform.forward);
         shotPos.rotation = this.transform.rotation;
         GameObject shootingShell = Instantiate(shell, shotPos.position, shotPos.rotation);
         ShellController sc = shootingShell.GetComponent<ShellController>();
