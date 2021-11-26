@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class ShellController : MonoBehaviour
 {
     public UnityAction TurnEnd;
-
     public ParticleSystem exp;
+    public Camera shellCam;
 
     public static float DAMAGE = 30.0f;
     public static float radius = 2.0f;
@@ -78,5 +78,9 @@ public class ShellController : MonoBehaviour
         float distance = Vector3.Distance(shellOriginPos, targetOriginPos);
         if(distance > radius + 1.0f) return 0.0f;
         return 1.0f - 0.5f*distance/(radius + 1.0f);
+    }
+
+    public void CamSetting(Rect r) {
+        shellCam.rect = r;
     }
 }

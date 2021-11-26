@@ -77,8 +77,8 @@ public class CannonController : MonoBehaviour
 
         // fromRotation = transform.rotation;
         toRotation = Quaternion.Euler(xDegrees, yDegrees, 0);
-        // transform.rotation = Quaternion.Lerp(fromRotation, toRotation, Time.deltaTime * lerpSpeed);
         transform.rotation = toRotation;
+        // transform.rotation = Quaternion.Lerp(fromRotation, toRotation, Time.deltaTime * lerpSpeed);
     }
 
     public void Fire() {
@@ -86,7 +86,9 @@ public class CannonController : MonoBehaviour
         // Vector3 normVector = this.transform.InverseTransformDirection(this.transform.forward);
         shotPos.rotation = this.transform.rotation;
         GameObject shootingShell = Instantiate(shell, shotPos.position, shotPos.rotation);
-        shootingShell.GetComponent<ShellController>().TurnEnd += TurnEnd;
+        ShellController sc = shootingShell.GetComponent<ShellController>();
+        sc.TurnEnd += TurnEnd;
+        sc.CamSetting(properties.cameraRect);
         shootingShell.GetComponent<Rigidbody>().AddForce(shotPos.transform.forward * firePower, ForceMode.Impulse);
     }
 

@@ -11,6 +11,7 @@ public class PlayerProperties : MonoBehaviour
     public ViewMode view;
     public bool itsTurn;
     public bool isSieging;
+    public Rect cameraRect;
 
     PlayerProperties() {
         // view = ViewMode.Nothing;

@@ -17,8 +17,8 @@ public class GameController : MonoBehaviour {
             h.id = i;
             h.gc = this;
         }
-        players[0].GetComponent<PlayerController>().CamSetting(new Rect(0.0f, 0.0f, 0.5f, 1.0f));
-        players[1].GetComponent<PlayerController>().CamSetting(new Rect(0.5f, 0.0f, 1.0f, 1.0f));
+        players[0].GetComponent<PlayerProperties>().cameraRect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+        players[1].GetComponent<PlayerProperties>().cameraRect = new Rect(0.5f, 0.0f, 1.0f, 1.0f);
 
         prevTurn = 0;
         curTurn = 1;
